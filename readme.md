@@ -33,3 +33,5 @@ The weather for New York in Fahrenheit would be
 Using with CastleOS
 -------------------
 [CastleOS](http://castleos.com/) is a Windows based Home Automation controller. You can use JarvisWeather.exe in combination with the C# scripts located in the castleos folder of this repository. With these scripts, you can have the weather read back to you automatically each morning via Text to Speech (TTS).
+
+For more info on how to use these scripts with CastleOS, be sure to check out [my blog post](http://philhawthorne.com/j-a-r-v-i-s-inspired-weather-wake-up-announcement-for-castleos/)
