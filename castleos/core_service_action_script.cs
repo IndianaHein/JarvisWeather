@@ -71,7 +71,6 @@ class MyScript
 		    p.Start();
 		    
 		    string output = p.StandardOutput.ReadToEnd();
-		    ScriptingAPI.WriteDatabaseEntry(output);
 
 		    foreach (KeyValuePair<string, string> pair in ScriptingAPI.GetSonosDevices())
         	{
