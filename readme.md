@@ -14,8 +14,8 @@ Save the JarvisWeather.exe file from the compiled folder to your computer. You c
 
 From Commnand Prompt, execute JarvisWeather.exe with two command line paramaters
 
-# Your locations Yahoo! Weather ID. Use a free tool like http://woeid.rosselliot.co.nz to find this out
-# Either c for temperatures in Celcius, or f for Fahrenheit.
+1. Your locations Yahoo! Weather ID. Use a free tool like http://woeid.rosselliot.co.nz to find this out
+2. Either c for temperatures in Celcius, or f for Fahrenheit.
 
 
 #### Example
