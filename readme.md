@@ -15,17 +15,17 @@ Save the JarvisWeather.exe file from the compiled folder to your computer. You c
 From Commnand Prompt, execute JarvisWeather.exe with two command line paramaters
 
 1. Your locations Yahoo! Weather ID. Use a free tool like http://woeid.rosselliot.co.nz to find this out
-2. Either c for temperatures in Celcius, or f for Fahrenheit.
+2. Either `c` for temperatures in Celcius, or `f` for Fahrenheit.
 
 
 ##### Example
 
 
 To get the weather for Melbourne, Australia in Celcius use the following command
-`JarvisWeather.exe 1103816 c`
+	JarvisWeather.exe 1103816 c
 
 The weather for New York in Fahrenheit would be
-`JarvisWeather.exe 2459115 c`
+	JarvisWeather.exe 2459115 f
 
 
 Using with CastleOS
