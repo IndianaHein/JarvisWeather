@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Xml;
+using ForecastIO;
 
 public class MyProgram
 {
@@ -10,12 +10,14 @@ public class MyProgram
         {
             return;
         }
-
-        script.setCity(args[0]);
-        script.setUnits(args[1]);
+        script.setCity(args[1]);
+        float Lat = float.Parse(args[2]);
+        float Long = float.Parse(args[3]);
+        script.setKey(args[0]);
+        script.setLat(Lat);
+        script.setLong(Long);
 
         script.getWeather();
-
     }
 }
 
@@ -27,18 +29,30 @@ public class MyScript
     string TFCond = "";
     string TFHigh = "";
     string TFLow = "";
-
-    string units = "c";
     string city = "";
 
-    public void setUnits(string unit)
+    string api_key;
+    float Lat;
+    float Long;
+
+    public void setCity(string mycity)
     {
-        units = unit;
+        city = mycity;
     }
 
-    public void setCity(string cityid)
+    public void setLat(float lat)
     {
-        city = cityid;
+        Lat = lat;
+    }
+
+    public void setLong(float Long1)
+    {
+        Long = Long1;
+    }
+
+    public void setKey(string Key)
+    {
+        api_key = Key;
     }
 
     public void Main(string args)
@@ -48,28 +62,15 @@ public class MyScript
 
     public void getWeather()
     {
-        XmlDocument wData = new XmlDocument();
-        wData.Load("http://weather.yahooapis.com/forecastrss?w=" + city + "&u=" + units);
+        var request = new ForecastIORequest(api_key, Lat, Long, Unit.auto);
+        ForecastIOResponse response = request.Get();
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(wData.NameTable);
-        manager.AddNamespace("yweather", "http://xml.weather.yahoo.com/ns/rss/1.0");
-
-        XmlNode channel = wData.SelectSingleNode("rss").SelectSingleNode("channel");
-        XmlNodeList node = wData.SelectNodes("/rss/channel/item/yweather:forecastr", manager);
-
-        XmlNode item = channel.SelectSingleNode("item");
-
-        //Current Temperature
-        Temperature = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["temp"].Value;
-        Condition = channel.SelectSingleNode("item").SelectSingleNode("yweather:condition", manager).Attributes["text"].Value;
-
-        Town = channel.SelectSingleNode("yweather:location", manager).Attributes["city"].Value;
-
-        TFCond = channel.SelectSingleNode("item").SelectSingleNode("yweather:forecast", manager).Attributes["text"].Value;
-
-        TFHigh = channel.SelectSingleNode("item").SelectSingleNode("yweather:forecast", manager).Attributes["high"].Value;
-
-        TFLow = channel.SelectSingleNode("item").SelectSingleNode("yweather:forecast", manager).Attributes["low"].Value;
+        Temperature = Math.Round(response.currently.temperature).ToString();
+        Condition = response.currently.summary;
+        Town = city;
+        TFCond = response.daily.data[0].summary;
+        TFHigh = Math.Round(response.daily.data[0].temperatureMax).ToString();
+        TFLow = Math.Round(response.daily.data[0].temperatureMin).ToString();
 
         //Should we say Good Morning, Afternoon or Evening?
         TimeSpan morning_end = new TimeSpan(12, 00, 0); //10am
