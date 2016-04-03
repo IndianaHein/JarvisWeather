@@ -74,7 +74,7 @@ class MyScript
             Process p = new Process();
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.FileName = script_location;
-    		p.StartInfo.Arguments = api_key + " " + location_name " " + location_lat + " " + location_long;
+    		p.StartInfo.Arguments = api_key + " " + location_name + " " + location_lat + " " + location_long;
 
     		p.StartInfo.UseShellExecute = false;
 		    p.StartInfo.RedirectStandardOutput = true;
